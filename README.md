@@ -9,6 +9,6 @@
 
 01.01. [Введение в виртуализацию](01-virt-01-basics)  
 01.02. [Применение принципов IaaC в работе с виртуальными машинами](01-virt-02-iaac)  
-01.03. [(to-do) Введение в Docker](01-virt-03-docker)  
+01.03. [Введение в Docker](01-virt-03-docker)  
 01.04. [(to-do) Оркестрация группой Docker контейнеров на примере Docker Compose.](01-virt-04-docker-compose)  
 01.05. [(to-do) Оркестрация кластером Docker контейнеров на примере Docker Swarm.](01-virt-05-docker-swarm)  

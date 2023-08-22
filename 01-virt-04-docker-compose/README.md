@@ -7,7 +7,12 @@
 
 
 > #### Ответ:
-
+> Создал конфигурационный файл в формате HCL - [debian.custom.pkr.hcl](packer/debian.custom.pkr.hcl)
+> Сборка образа:
+> ![start build](img/01.png)
+> ![end build](img/02.png)
+> Скриншот из консоли управления Yandex Cloud:
+> ![console screen with image](img/03.png)
 
 ---
 
@@ -16,13 +21,18 @@
 
 **2.2.*** **(Необязательное задание)**  
 Создайте вашу первую виртуальную машину в YandexCloud с помощью Terraform (вместо использования веб-интерфейса YandexCloud).
-Используйте Terraform-код в директории ([src/terraform](https://github.com/netology-group/virt-homeworks/tree/virt-11/05-virt-04-docker-compose/src/terraform)).
+Используйте Terraform-код в директории ([src/terraform](src/terraform)).
 
 Чтобы получить зачёт, вам нужно предоставить вывод команды terraform apply и страницы свойств, созданной ВМ из личного кабинета YandexCloud.
 
 
 > #### Ответ:
-
+> Создал ВМ с помощью Terraform. Скорректировал конфиги в [src/terraform](src/terraform), добавил использование tfvars.  
+> Запуск terraform apply:
+> ![terraform apply](img/04.png)
+> ![terraform complete](img/05.png)
+> Созданная нода в Yandex Cloud
+> ![node properties in console](img/06.png)
 
 ---
 

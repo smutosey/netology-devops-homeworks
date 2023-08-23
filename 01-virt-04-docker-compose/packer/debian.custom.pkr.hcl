@@ -10,7 +10,7 @@ variable "YC_FOLDER_ID" {
 
 variable "YC_SUBNET_ID" {
   type    = string
-  default = "e2l7lk727ta98ntvosad"
+  default = "e2l6fsfq6dvfcun3sc60"
 }
 
 variable "YC_ZONE" {
@@ -40,20 +40,20 @@ build {
       "sudo apt-get update",
       "sudo apt-get install -y unzip python3-pip",
       "sudo apt-get install -y git jq tree",
-      # Docker
-      "sudo apt-get install -y ca-certificates curl gnupg",
-      "sudo install -m 0755 -d /etc/apt/keyrings",
-      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
-      "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
-      "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
-      "sudo apt-get update",
-      "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
-      "sudo chmod 666 /var/run/docker.sock",
-      "sudo usermod -aG docker $USER",
+#      # Docker
+#      "sudo apt-get install -y ca-certificates curl gnupg",
+#      "sudo install -m 0755 -d /etc/apt/keyrings",
+#      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
+#      "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
+#      "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
+#      "sudo apt-get update",
+#      "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
+#      "sudo chmod 666 /var/run/docker.sock",
+#      "sudo usermod -aG docker $USER",
       # Test - Check versions for installed components
       "echo '=== Tests Start ==='",
-      "docker version",
-      "sudo docker run hello-world",
+#      "docker version",
+#      "sudo docker run hello-world",
       "git --version",
       "jq --version",
       "tree --version",

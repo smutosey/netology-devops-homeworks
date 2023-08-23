@@ -1,0 +1,111 @@
+---
+- name: Docker pre-configuring
+  hosts: nodes
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Create directory for ssh-keys
+      ansible.builtin.file:
+        state: directory
+        mode: 0700
+        dest: /root/.ssh/
+
+    - name: Adding rsa-key in /root/.ssh/authorized_keys
+      ansible.builtin.copy:
+        src: ~/.ssh/id_rsa.pub
+        dest: /root/.ssh/authorized_keys
+        owner: root
+        mode: 0600
+      ignore_errors: true
+
+    - name: Checking DNS
+      ansible.builtin.command: host -t A google.com
+
+    - name: Add Docker GPG apt Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+
+    - name: Installing tools
+      ansible.builtin.apt:
+        pkg:
+        - git
+        - curl
+        state: present
+        update_cache: true
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: 'deb https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable'
+        validate_certs: true
+        state: present
+
+    - name: Update apt and install docker-ce
+      ansible.builtin.apt:
+        pkg:
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
+        state: latest
+        update_cache: true
+
+    - name: Install Docker Module for Python
+      ansible.builtin.pip:
+        name: docker
+
+    - name: Enable docker daemon
+      ansible.builtin.systemd:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: adding existing user '{{ ansible_user }}' to group docker
+      ansible.builtin.user:
+        name: '{{ ansible_user }}'
+        groups: docker
+        append: yes
+
+- name: Configure Manager stack
+  hosts: manager
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Synchronization
+      ansible.builtin.copy:
+        src: stack/
+        dest: "/opt/stack/"
+        owner: root
+        group: root
+        mode: 0644
+      become: true
+
+    - name: Pull all images in compose
+      ansible.builtin.command: docker compose -f /opt/stack/docker-compose.yaml pull
+
+    - name: Up all services in compose
+      ansible.builtin.command: docker compose -f /opt/stack/docker-compose.yaml up -d
+
+- name: Configure targets to observe
+  hosts: targets
+  become: true
+  become_user: root
+
+  tasks:
+    - name: Synchronization
+      ansible.builtin.copy:
+        src: stack/exporters/
+        dest: "/opt/exporters/"
+        owner: root
+        group: root
+        mode: 0644
+      become: true
+
+    - name: Pull all images in compose
+      ansible.builtin.command: docker compose -f /opt/exporters/docker-compose.exporters.yaml pull
+
+    - name: Up all services in compose
+      ansible.builtin.command: docker compose -f /opt/exporters/docker-compose.exporters.yaml up -d

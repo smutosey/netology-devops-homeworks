@@ -1,0 +1,10 @@
+nodes:
+  children:
+    manager:
+      hosts:
+        node01.netology.cloud:
+          ansible_host: 51.250.108.163
+          ansible_user: debian
+    targets:
+      hosts:
+#         target01.netology.cloud:

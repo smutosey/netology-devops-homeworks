@@ -3,8 +3,10 @@ nodes:
     manager:
       hosts:
         node01.netology.cloud:
-          ansible_host: 51.250.108.163
+          ansible_host: 158.160.27.233
           ansible_user: debian
     targets:
       hosts:
-#         target01.netology.cloud:
+        target01.netology.cloud:
+          ansible_host: 158.160.11.150
+          ansible_user: debian

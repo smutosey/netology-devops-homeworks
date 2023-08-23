@@ -16,7 +16,8 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 1,
-  "id": 13,
+  "id": 2,
+  "iteration": 1692769100861,
   "links": [],
   "panels": [
     {
@@ -32,6 +33,12 @@
       "decimals": 1,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "s",
       "gauge": {
         "maxValue": 100,
@@ -85,9 +92,11 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_time_seconds - node_boot_time_seconds",
+          "expr": "node_time_seconds{instance=~\"$node\"}-node_boot_time_seconds{instance=~\"$node\"}",
+          "instant": true,
           "interval": "30s",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A",
           "step": 30
         }
@@ -119,6 +128,12 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "percent",
       "gauge": {
         "maxValue": 100,
@@ -172,7 +187,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100 / scalar(count(node_cpu_seconds_total{mode=\"user\"}))",
+          "expr": "sum(rate(node_cpu_seconds_total{instance=~\"$node\",mode=\"idle\"}[1m])) * 100 / scalar(count(node_cpu_seconds_total{instance=~\"$node\",mode=\"user\"}))",
           "interval": "10s",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -207,6 +222,12 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "none",
       "gauge": {
         "maxValue": 100,
@@ -261,7 +282,9 @@
       "targets": [
         {
           "expr": "machine_cpu_cores",
+          "interval": "",
           "intervalFactor": 2,
+          "legendFormat": "",
           "metric": "machine_cpu_cores",
           "refId": "A",
           "step": 2
@@ -294,6 +317,12 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -347,7 +376,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_memory_MemAvailable_bytes",
+          "expr": "node_memory_MemAvailable_bytes{instance=~\"$node\"}",
           "interval": "30s",
           "intervalFactor": 2,
           "legendFormat": "",
@@ -382,6 +411,12 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -435,9 +470,10 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "node_memory_SwapFree_bytes",
+          "expr": "node_memory_SwapFree_bytes{instance=~\"$node\"}",
           "interval": "30s",
           "intervalFactor": 2,
+          "legendFormat": "",
           "refId": "A",
           "step": 60
         }
@@ -469,6 +505,12 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
       "format": "bytes",
       "gauge": {
         "maxValue": 100,
@@ -522,7 +564,7 @@
       "tableColumn": "",
       "targets": [
         {
-          "expr": "sum(node_filesystem_free_bytes{fstype=\"ext4\"})",
+          "expr": "sum(node_filesystem_free_bytes{instance=~\"$node\",fstype=\"ext4\"})",
           "interval": "30s",
           "intervalFactor": 1,
           "legendFormat": "",
@@ -554,6 +596,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "grid": {},
@@ -580,9 +629,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -597,12 +647,11 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_load1",
-          "interval": "10s",
-          "intervalFactor": 1,
-          "legendFormat": "load 1m",
-          "refId": "A",
-          "step": 10
+          "expr": "node_load1{instance=~\"$node\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -656,6 +705,13 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "grid": {},
@@ -682,9 +738,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -699,7 +756,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_procs_running",
+          "expr": "node_procs_running{instance=~\"$node\"}",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "running",
@@ -708,7 +765,7 @@
           "step": 10
         },
         {
-          "expr": "node_procs_blocked",
+          "expr": "node_procs_blocked{instance=~\"$node\"}",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "blocked by I/O",
@@ -768,6 +825,13 @@
       "datasource": "Prometheus",
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "grid": {},
@@ -794,9 +858,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -811,7 +876,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": " irate(node_intr_total[5m])",
+          "expr": " irate(node_intr_total{instance=~\"$node\"}[5m])",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "interrupts",
@@ -872,6 +937,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 4,
       "fillGradient": 0,
       "grid": {},
@@ -902,9 +974,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -914,7 +987,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate(node_cpu_seconds_total[1m])) by (mode) * 100 / scalar(count(node_cpu_seconds_total{mode=\"user\"}))",
+          "expr": "sum(rate(node_cpu_seconds_total{instance=~\"$node\"}[1m])) by (mode) * 100 / scalar(count(node_cpu_seconds_total{instance=~\"$node\",mode=\"user\"}))",
+          "interval": "",
           "intervalFactor": 10,
           "legendFormat": "{{ mode }}",
           "metric": "node_cpu_seconds_total",
@@ -974,6 +1048,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 4,
       "fillGradient": 0,
       "grid": {},
@@ -1004,9 +1085,10 @@
       "links": [],
       "nullPointMode": "null",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1033,28 +1115,32 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_memory_MemTotal_bytes - (node_memory_MemFree_bytes + node_memory_Buffers_bytes + node_memory_Cached_bytes)",
+          "expr": "node_memory_MemTotal_bytes{instance=~\"$node\"} - (node_memory_MemFree_bytes{instance=~\"$node\"} + node_memory_Buffers_bytes{instance=~\"$node\"} + node_memory_Cached_bytes{instance=~\"$node\"})",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Used",
           "refId": "A",
           "step": 1
         },
         {
-          "expr": "node_memory_MemFree_bytes",
+          "expr": "node_memory_MemFree_bytes{instance=~\"$node\"}",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Free",
           "refId": "B",
           "step": 1
         },
         {
-          "expr": "node_memory_Buffers_bytes",
+          "expr": "node_memory_Buffers_bytes{instance=~\"$node\"}",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Buffers",
           "refId": "C",
           "step": 1
         },
         {
-          "expr": "node_memory_Cached_bytes",
+          "expr": "node_memory_Cached_bytes{instance=~\"$node\"}",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Cached",
           "refId": "D",
@@ -1113,6 +1199,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 4,
       "fillGradient": 0,
       "grid": {},
@@ -1141,9 +1234,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1162,7 +1256,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "node_memory_SwapTotal_bytes - node_memory_SwapFree_bytes",
+          "expr": "node_memory_SwapTotal_bytes{instance=~\"$node\"} - node_memory_SwapFree_bytes{instance=~\"$node\"}",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Used",
@@ -1170,7 +1264,7 @@
           "step": 10
         },
         {
-          "expr": "node_memory_SwapFree_bytes",
+          "expr": "node_memory_SwapFree_bytes{instance=~\"$node\"}",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Free",
@@ -1230,6 +1324,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "grid": {},
@@ -1258,9 +1359,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1283,7 +1385,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(irate(node_disk_read_bytes_total[1m]))",
+          "expr": "sum(irate(node_disk_read_bytes_total{instance=~\"$node\"}[1m]))",
           "interval": "",
           "intervalFactor": 1,
           "legendFormat": "read",
@@ -1292,7 +1394,8 @@
           "step": 1
         },
         {
-          "expr": "sum(irate(node_disk_written_bytes_total[1m]))",
+          "expr": "sum(irate(node_disk_written_bytes_total{instance=~\"$node\"}[1m]))",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "written",
           "metric": "node_disk_written_bytes_total",
@@ -1300,7 +1403,8 @@
           "step": 1
         },
         {
-          "expr": "sum(irate(node_disk_io_time_seconds_total[1m]))",
+          "expr": "sum(irate(node_disk_io_time_seconds_total{instance=~\"$node\"}[1m]))",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "io time",
           "metric": "node_disk_io_time_seconds_total",
@@ -1360,6 +1464,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 1,
       "fillGradient": 0,
       "grid": {},
@@ -1390,9 +1501,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1402,7 +1514,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(node_vmstat_pswpin[1m]) * 4096 or irate(node_vmstat_pswpin[5m]) * 4096",
+          "expr": "rate(node_vmstat_pswpin{instance=~\"$node\"}[1m]) * 4096 or irate(node_vmstat_pswpin{instance=~\"$node\"}[5m]) * 4096",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "In",
@@ -1410,7 +1522,7 @@
           "step": 10
         },
         {
-          "expr": "rate(node_vmstat_pswpout[1m]) * 4096 or irate(node_vmstat_pswpout[5m]) * 4096",
+          "expr": "rate(node_vmstat_pswpout{instance=~\"$node\"}[1m]) * 4096 or irate(node_vmstat_pswpout{instance=~\"$node\"}[5m]) * 4096",
           "interval": "10s",
           "intervalFactor": 1,
           "legendFormat": "Out",
@@ -1471,6 +1583,13 @@
       "decimals": 2,
       "editable": true,
       "error": false,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "links": []
+        },
+        "overrides": []
+      },
       "fill": 4,
       "fillGradient": 0,
       "grid": {},
@@ -1499,10 +1618,10 @@
       "links": [],
       "nullPointMode": "connected",
       "options": {
-        "dataLinks": []
+        "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "6.7.2",
+      "pluginVersion": "7.4.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -1512,7 +1631,8 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "irate(node_network_receive_bytes_total{device!=\"lo\"}[1m])",
+          "expr": "irate(node_network_receive_bytes_total{instance=~\"$node\",device!=\"lo\"}[1m])",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "In: {{ device }}",
           "metric": "node_network_receive_bytes_total",
@@ -1520,7 +1640,8 @@
           "step": 1
         },
         {
-          "expr": "irate(node_network_transmit_bytes_total{device!=\"lo\"}[1m])",
+          "expr": "irate(node_network_transmit_bytes_total{instance=~\"$node\",device!=\"lo\"}[1m])",
+          "interval": "",
           "intervalFactor": 1,
           "legendFormat": "Out: {{ device }}",
           "metric": "node_network_transmit_bytes_total",
@@ -1572,14 +1693,77 @@
       }
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 22,
+  "refresh": false,
+  "schemaVersion": 27,
   "style": "dark",
   "tags": [
     "system"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "nodeexporter",
+          "value": "nodeexporter"
+        },
+        "datasource": null,
+        "definition": "label_values(node_uname_info, job)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Job",
+        "multi": false,
+        "name": "job",
+        "options": [],
+        "query": {
+          "query": "label_values(node_uname_info, job)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "target01.netology.cloud:9100",
+          "value": "target01.netology.cloud:9100"
+        },
+        "datasource": null,
+        "definition": "label_values(node_uname_info{job=~\"$job\"}, instance)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Host:",
+        "multi": false,
+        "name": "node",
+        "options": [],
+        "query": {
+          "query": "label_values(node_uname_info{job=~\"$job\"}, instance)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-12h",
@@ -1613,8 +1797,5 @@
   "timezone": "browser",
   "title": "Docker Host",
   "uid": "ub4sGc3Wk",
-  "variables": {
-    "list": []
-  },
-  "version": 1
+  "version": 16
 }

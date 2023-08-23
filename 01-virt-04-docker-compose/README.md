@@ -18,6 +18,7 @@
 
 ### Задача 2
 **2.1.** Создайте вашу первую виртуальную машину в YandexCloud с помощью web-интерфейса YandexCloud.        
+> ![manual create](img/04_0.png)
 
 **2.2.*** **(Необязательное задание)**  
 Создайте вашу первую виртуальную машину в YandexCloud с помощью Terraform (вместо использования веб-интерфейса YandexCloud).
@@ -72,6 +73,11 @@
 - скриншот из Grafana, на котором будут отображаться метрики добавленного вами сервера.
 
 > #### Ответ:
-
-
+> Добавил в terraform создание ВМ [target01](terraform/target01.tf) и output.  
+> Добавил в [ansible](ansible) provision таргета с запуском экспортеров, изменил конфиг prometheus, а также актуализировал inventory  
+> Прогон плейбука ansible:
+> ![ansible run](img/09.png)  
+> Изменил [дашборд Docker Host](ansible/stack/grafana/provisioning/dashboards/general_docker_host.json) 
+> в Grafana таким образом, чтобы можно было изменять instance для отображения. Теперь на нём видны метрики target01 хоста:  
+> ![target in grafana](img/10.png)
 ---

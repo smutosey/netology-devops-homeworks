@@ -68,6 +68,7 @@
         groups: docker
         append: yes
 
+
 - name: Configure Manager stack
   hosts: manager
   become: true
@@ -88,6 +89,7 @@
 
     - name: Up all services in compose
       ansible.builtin.command: docker compose -f /opt/stack/docker-compose.yaml up -d
+
 
 - name: Configure targets to observe
   hosts: targets

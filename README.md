@@ -12,3 +12,13 @@
 01.03. [Введение в Docker](01-virt-03-docker)  
 01.04. [Оркестрация группой Docker контейнеров на примере Docker Compose.](01-virt-04-docker-compose)  
 01.05. [Оркестрация кластером Docker контейнеров на примере Docker Swarm.](01-virt-05-docker-swarm)  
+
+## Модуль "Администрирование баз данных для DevOps-инженеров"  
+Задания - [тут](https://github.com/netology-code/bd-dev-homeworks)  
+
+02.01. [Типы и структура СУБД](02-db-01-basics)  
+02.02. [(to-do) SQL](02-db-02-sql)  
+02.03. [(to-do) MySQL](02-db-03-mysql)  
+02.04. [(to-do) PostgreSQL](02-db-04-postgresql)  
+02.05. [(to-do) Elasticsearch](02-db-05-elasticsearch)  
+02.06. [(to-do) Troubleshooting](02-db-06-troubleshooting)  

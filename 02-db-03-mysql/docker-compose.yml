@@ -1,0 +1,17 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql:8.1
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 'mysql'
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./mysql/backup:/docker-entrypoint-initdb.d
+#       - ./mysql/conf:/etc/mysql:rw
+
+volumes:
+  mysql-data:
+    name: mysql-data

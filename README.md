@@ -18,7 +18,7 @@
 
 02.01. [Типы и структура СУБД](02-db-01-basics)  
 02.02. [SQL](02-db-02-sql)  
-02.03. [(to-do) MySQL](02-db-03-mysql)  
-02.04. [(to-do) PostgreSQL](02-db-04-postgresql)  
+02.03. [MySQL](02-db-03-mysql)  
+02.04. [PostgreSQL](02-db-04-postgresql)  
 02.05. [(to-do) Elasticsearch](02-db-05-elasticsearch)  
 02.06. [(to-do) Troubleshooting](02-db-06-troubleshooting)  

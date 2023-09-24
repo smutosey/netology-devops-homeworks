@@ -1,0 +1,7 @@
+cluster.name: my_elastic
+node.name: netology_test
+
+path:
+  data: /var/lib/data
+  repo: snapshots
+xpack.ml.enabled: false

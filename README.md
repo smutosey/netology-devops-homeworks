@@ -21,4 +21,4 @@
 02.03. [MySQL](02-db-03-mysql)  
 02.04. [PostgreSQL](02-db-04-postgresql)  
 02.05. [Elasticsearch](02-db-05-elastic)  
-02.06. [(to-do) Troubleshooting](02-db-06-troubleshooting)  
+02.06. [Troubleshooting](02-db-06-troubleshooting)  

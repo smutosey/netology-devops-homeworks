@@ -2,7 +2,7 @@
 
 ------
 
-### Задание 1
+## Задание 1
 
 > [!NOTE]
 > 1. Перейдите в каталог [**src**](https://github.com/netology-code/ter-homeworks/tree/main/01/src). Скачайте все необходимые зависимости, использованные в проекте. 
@@ -93,7 +93,7 @@ resource "docker_container" "nginx" {
 ------
 
 
-### Задание 2*
+## Задание 2*
 
 > [!NOTE]
 > 1. Изучите в документации provider [**Virtualbox**](https://docs.comcloud.xyz/providers/shekeriev/virtualbox/latest/docs) от 

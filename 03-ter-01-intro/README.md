@@ -46,7 +46,7 @@ resource "docker_container" "nginx" {
   }
 }
 ```
-> Вывод команды:  
+> Вывод команды:
 ![](img/01.png "docker ps")   
 
 6. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.

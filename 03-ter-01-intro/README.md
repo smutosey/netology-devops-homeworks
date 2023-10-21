@@ -28,25 +28,25 @@
 
 5. Выполните код. В качестве ответа приложите: исправленный фрагмент кода и вывод команды ```docker ps```.
 
-> Исправленный код:  
->  ```terraform
->  resource "docker_image" "nginx"{
->    name         = "nginx:latest"
->    keep_locally = true
->  }
->  
->  resource "docker_container" "nginx" {
->    image = docker_image.nginx.image_id
->    name  = "example_${random_password.random_string.result}"
->  
->    ports {
->      internal = 80
->      external = 8000
->    }
->  }
->  ```
-> Вывод команды:  
 
+> Исправленный код:  
+```terraform
+resource "docker_image" "nginx"{
+  name         = "nginx:latest"
+  keep_locally = true
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.image_id
+  name  = "example_${random_password.random_string.result}"
+
+  ports {
+    internal = 80
+    external = 8000
+  }
+}
+```
+> Вывод команды:  
 ![](img/01.png "docker ps")   
 
 6. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.

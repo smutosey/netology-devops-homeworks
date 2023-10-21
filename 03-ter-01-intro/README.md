@@ -95,7 +95,7 @@ resource "docker_container" "nginx" {
 
 ### Задание 2*
 
-> [!NOTE]
+> [!Task]
 > 1. Изучите в документации provider [**Virtualbox**](https://docs.comcloud.xyz/providers/shekeriev/virtualbox/latest/docs) от 
 shekeriev.
 > 2. Создайте с его помощью любую виртуальную машину. Чтобы не использовать VPN, советуем выбрать любой образ с расположением в GitHub из [**списка**](https://www.vagrantbox.es/).

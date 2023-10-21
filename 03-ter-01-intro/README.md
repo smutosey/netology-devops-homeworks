@@ -40,7 +40,7 @@
 >  }
 >  ```
 > Вывод команды:  
-> ![docker ps](img/01.png)  
+> ![docker ps](https://github.com/smutosey/netology-devops-homeworks/blob/main/03-ter-01-intro/img/01.png)  
 6. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.
 Объясните своими словами, в чём может быть опасность применения ключа  ```-auto-approve```. В качестве ответа дополнительно приложите вывод команды ```docker ps```.
 > ![tf apply](img/02.png)  

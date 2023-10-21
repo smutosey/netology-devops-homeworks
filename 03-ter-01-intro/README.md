@@ -40,15 +40,15 @@
 >  }
 >  ```
 > Вывод команды:  
-> ![docker ps](https://github.com/smutosey/netology-devops-homeworks/blob/main/03-ter-01-intro/img/01.png)  
+> ![docker ps](img/01.png "docker ps")   
 6. Замените имя docker-контейнера в блоке кода на ```hello_world```. Не перепутайте имя контейнера и имя образа. Мы всё ещё продолжаем использовать name = "nginx:latest". Выполните команду ```terraform apply -auto-approve```.
 Объясните своими словами, в чём может быть опасность применения ключа  ```-auto-approve```. В качестве ответа дополнительно приложите вывод команды ```docker ps```.
-> ![tf apply](img/02.png)  
+> ![tf apply](img/02.png "terraform apply")  
 > Ключ `-auto-approve` отключает интерактивное подтверждение `apply`, т.е. мы не можем до применения изменений проверить
 > план этих изменений (что уничтожается, изменяется, добавляется), и в случае ошибки его подкорректировать.
 7. Уничтожьте созданные ресурсы с помощью **terraform**. Убедитесь, что все ресурсы удалены. Приложите содержимое файла **terraform.tfstate**.
 > Результат `terraform destroy`:
-> ![destroy](img/03.png) 
+> ![destroy](img/03.png "terraform destroy") 
 > Содержимое _terraform.tfstate_:
 > ```json
 > {
@@ -116,7 +116,7 @@ shekeriev.
 > ```
 > 
 > Результат выполнения:  
-> ![vm apply](img/04.png)
+> ![vm apply](img/04.png "vm terraform apply")
 > 
-> ![vm](img/05.png)  
+> ![vm](img/05.png "vm in virtualbox")  
 ------

@@ -79,7 +79,7 @@ shekeriev.
 
 В качестве ответа приложите plan для создаваемого ресурса и скриншот созданного в VB ресурса. 
 > #### Ответ:
-> Terraform-конфигурация: [vm/main.tf](vm/main.tf)  
+> Terraform-конфигурация: [/03-ter-01-intro/vm/main.tf](vm/main.tf)  
 > Plan создаваемого ресурса:
 > ```shell
 > PS E:\netology-devops-homeworks\03-ter-01-intro\vm> terraform apply  

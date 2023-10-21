@@ -5,7 +5,7 @@
 задачами и/или задачами повышенной сложности. Они не являются обязательными к выполнению, но помогут глубже понять тему.
 
 
-## Модуль "Виртуализация и контейнеризация"  
+## Модуль "Виртуализация и контейнеризация"
 
 01.01. [Введение в виртуализацию](01-virt-01-basics)  
 01.02. [Применение принципов IaaC в работе с виртуальными машинами](01-virt-02-iaac)  
@@ -13,7 +13,7 @@
 01.04. [Оркестрация группой Docker контейнеров на примере Docker Compose.](01-virt-04-docker-compose)  
 01.05. [Оркестрация кластером Docker контейнеров на примере Docker Swarm.](01-virt-05-docker-swarm)  
 
-## Модуль "Администрирование баз данных для DevOps-инженеров"  
+## Модуль "Администрирование баз данных для DevOps-инженеров"
 Задания - [тут](https://github.com/netology-code/bd-dev-homeworks)  
 
 02.01. [Типы и структура СУБД](02-db-01-basics)  
@@ -21,4 +21,13 @@
 02.03. [MySQL](02-db-03-mysql)  
 02.04. [PostgreSQL](02-db-04-postgresql)  
 02.05. [Elasticsearch](02-db-05-elastic)  
-02.06. [Troubleshooting](02-db-06-troubleshooting)  
+02.06. [Troubleshooting](02-db-06-troubleshooting)
+
+## Модуль "Облачная инфраструктура. Terraform"
+Задания - [тут](https://github.com/netology-code/ter-homeworks) 
+
+03.01. [Введение в Terraform](03-ter-01-intro)  
+03.02. [(to-do) Основы Terraform. Yandex Cloud](03-ter-02-basics)  
+03.03. [(to-do) Управляющие конструкции в коде Terraform](03-ter-03-modules)  
+03.04. [(to-do) Продвинутые методы работы с Terraform](03-ter-04-extended)  
+03.05. [(to-do) Использование Terraform в команде](03-ter-05-teamwork)

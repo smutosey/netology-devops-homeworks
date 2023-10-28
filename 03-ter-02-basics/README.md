@@ -48,7 +48,7 @@
 > #### Ответ:
 > Добавил необходимые переменные в [variables.tf](src/variables.tf).  
 > В [main.tf](src/main.tf) заменил хардкод-значения, получилось:  
-> ![resource with vars](img/05.png)  
+> ![resource with vars](img/05.png) 
 > `terraform plan` подтвердил, что изменений не обнаружено:  
 > ![plan](img/06.png)  
 > 
@@ -123,18 +123,37 @@
  
 Изучите содержимое файла console.tf. Откройте terraform console, выполните следующие задания: 
 
-1. Напишите, какой командой можно отобразить **второй** элемент списка test_list.
+1. Напишите, какой командой можно отобразить **второй** элемент списка test_list.  
+> #### Ответ: 
+> ```shell
+> local.test_list[1]
+> ```
+> ![7.1](img/17.png) 
+
 2. Найдите длину списка test_list с помощью функции length(<имя переменной>).
+> #### Ответ:
+> ```shell
+> length(local.test_list)
+> ```
+> ![7.2](img/18.png) 
+
 3. Напишите, какой командой можно отобразить значение ключа admin из map test_map.
-4. Напишите interpolation-выражение, результатом которого будет: "John is admin for production server based on OS ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
+> #### Ответ:
+> ```shell
+> local.test_map.admin
+> ```
+> ![7.3](img/19.png) 
+
+4. Напишите interpolation-выражение, результатом которого будет: 
+"John is admin for production server based on OS ubuntu-20-04 with X vcpu, Y ram and Z virtual disks", используйте данные из переменных test_list, test_map, servers и функцию length() для подстановки значений.
+> #### Ответ: 
+> Просто обращаемся к ключам, также добавил вывод списка disks с помощью `join`
+> ```shell
+> "${local.test_map.admin} is admin for ${local.test_list[2]} server based on OS ${local.servers[local.test_list[2]].image} with ${local.servers[local.test_list[2]].cpu} vcpu, ${local.servers[local.test_list[2]].ram} ram, and ${length(local.servers[local.test_list[2]].disks)} virtual disks (${join(", ", local.servers[local.test_list[2]].disks)})"
+> ```
+> ![7.4](img/20.png) 
 
 В качестве решения предоставьте необходимые команды и их вывод.
-
-> #### Ответ:
-> 
-> 
-> 
-
 
 ------
 ## Правила приёма работы

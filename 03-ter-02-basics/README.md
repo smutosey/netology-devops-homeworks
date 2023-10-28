@@ -92,7 +92,11 @@
 3. Примените изменения.
 
 > #### Ответ:
+> Описание в файле [locals.tf](src/locals.tf):  
+> ![locals](img/12.png)
 > 
+> В [main.tf](src/main.tf) теперь используем `local.web_name` и `local.db_name` в имени ВМ.  Terraform `apply` изменений не обнаружил:
+> ![tf apply](img/13.png) 
 
 ------
 

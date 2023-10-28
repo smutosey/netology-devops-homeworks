@@ -108,7 +108,13 @@
 4. Проверьте terraform plan. Изменений быть не должно.
 
 > #### Ответ:
-> 
+> В [vms_platform.tf](src/vms_platform.tf) добавил переменные для ресурсов и метаданных:
+> ![map vars](img/14.png) 
+> Как выглядит использование переменных:  
+> ![vars usage](img/15.png) 
+> В файлах [vms_platform.tf](src/vms_platform.tf) и [variables.tf](src/variables.tf) закомментировал ненужные переменные.
+> `terraform plan` показал, что изменений нет:
+> ![plan](img/16.png) 
 > 
 
 ------

@@ -16,10 +16,11 @@ data "yandex_compute_image" "ubuntu" {
 resource "yandex_compute_instance" "platform" {
   name        = local.web_name
   platform_id = var.vm_web_platform
+  metadata    = var.vm_metadata
   resources {
-    cores         = var.vm_web_resource_cores
-    memory        = var.vm_web_resource_memory
-    core_fraction = var.vm_web_resource_core_fraction
+    cores         = var.vm_resources.web.cores
+    memory        = var.vm_resources.web.memory
+    core_fraction = var.vm_resources.web.core_fraction
   }
   boot_disk {
     initialize_params {
@@ -33,20 +34,16 @@ resource "yandex_compute_instance" "platform" {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = var.vm_web_network_nat
   }
-
-  metadata = {
-    serial-port-enable = var.vm_web_serial_port_enable
-    ssh-keys           = "${var.vm_web_user}:${var.vms_ssh_root_key}"
-  }
 }
 
 resource "yandex_compute_instance" "platform-db" {
   name        = local.db_name
   platform_id = var.vm_db_platform
+  metadata    = var.vm_metadata
   resources {
-    cores         = var.vm_db_resource_cores
-    memory        = var.vm_db_resource_memory
-    core_fraction = var.vm_db_resource_core_fraction
+    cores         = var.vm_resources.db.cores
+    memory        = var.vm_resources.db.memory
+    core_fraction = var.vm_resources.db.core_fraction
   }
   boot_disk {
     initialize_params {
@@ -59,10 +56,5 @@ resource "yandex_compute_instance" "platform-db" {
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = var.vm_db_network_nat
-  }
-
-  metadata = {
-    serial-port-enable = var.vm_db_serial_port_enable
-    ssh-keys           = "${var.vm_db_user}:${var.vms_ssh_root_key}"
   }
 }

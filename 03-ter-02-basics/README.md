@@ -1,4 +1,5 @@
-# Домашнее задание к занятию «Основы Terraform. Yandex Cloud»
+# Домашнее задание к занятию «Основы Terraform. Yandex Cloud»  
+## Студент: Александр Недорезов 
 
 ------
 
@@ -45,11 +46,11 @@
 4. Проверьте terraform plan. Изменений быть не должно. 
 
 > #### Ответ:
-> Добавил необходимые переменные в [variables.tf](src/variables.tf)
+> Добавил необходимые переменные в [variables.tf](src/variables.tf).  
 > В [main.tf](src/main.tf) заменил хардкод-значения, получилось:  
-> ![resource with vars](img/05.png)
+> ![resource with vars](img/05.png)  
 > `terraform plan` подтвердил, что изменений не обнаружено:  
-> ![plan](img/06.png)
+> ![plan](img/06.png)  
 > 
 
 ------
@@ -61,7 +62,12 @@
 3. Примените изменения.
 
 > #### Ответ:
-> 
+> Создал [vms_platform.tf](src/vms_platform.tf), перенес в него созданные переменные, а также продублировал с vm_db_ префиксом.  
+> В [main.tf](src/main.tf) создал новый ресурс `yandex_compute_instance` "platform-db":
+> ![platform-db](img/07.png) 
+> Результат `terraform apply`:
+> ![db apply](img/08.png) 
+> ![yc two vms](img/09.png)  
 
 ------
 

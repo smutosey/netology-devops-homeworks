@@ -27,7 +27,7 @@
 Задания - [тут](https://github.com/netology-code/ter-homeworks) 
 
 03.01. [Введение в Terraform](03-ter-01-intro)  
-03.02. [(to-do) Основы Terraform. Yandex Cloud](03-ter-02-basics)  
-03.03. [(to-do) Управляющие конструкции в коде Terraform](03-ter-03-modules)  
+03.02. [Основы Terraform. Yandex Cloud](03-ter-02-basics)  
+03.03. [Управляющие конструкции в коде Terraform](03-ter-03-structures)  
 03.04. [(to-do) Продвинутые методы работы с Terraform](03-ter-04-extended)  
 03.05. [(to-do) Использование Terraform в команде](03-ter-05-teamwork)

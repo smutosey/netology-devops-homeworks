@@ -33,7 +33,7 @@
 # Для этого нужно запустить terraform console из папки с файлом.
 
 variable "my_tuple" {
-  type = tuple([string, number])
+  type    = tuple([string, number])
   default = ["hello", 42]
 }
 
@@ -43,16 +43,16 @@ variable "my_tuple" {
 variable "my_object" {
   type = map(object({
     name = string
-    age = number
+    age  = number
   }))
   default = {
     "person1" = {
       name = "John"
-      age = 30
+      age  = 30
     }
     "person2" = {
       name = "Jane"
-      age = 25
+      age  = 25
     }
   }
 }
@@ -88,21 +88,21 @@ variable "user_contacts2" {
   default = {
     "john" = {
       "email" = [
-        {"value" = "john@example.com", "last_updated" = "2022-01-01", "is_primary" = true},
-        {"value" = "john@gmail.com", "last_updated" = "2022-02-01", "is_primary" = false}
+        { "value" = "john@example.com", "last_updated" = "2022-01-01", "is_primary" = true },
+        { "value" = "john@gmail.com", "last_updated" = "2022-02-01", "is_primary" = false }
       ]
       "phone" = [
-        {"value" = "555-555-1234", "last_updated" = "2022-01-01", "is_primary" = true}
+        { "value" = "555-555-1234", "last_updated" = "2022-01-01", "is_primary" = true }
       ]
     }
     "jane" = {
       "email" = [
-        {"value" = "jane@example.com", "last_updated" = "2022-02-01", "is_primary" = true},
-        {"value" = "jane@gmail.com", "last_updated" = "2022-03-01", "is_primary" = false}
+        { "value" = "jane@example.com", "last_updated" = "2022-02-01", "is_primary" = true },
+        { "value" = "jane@gmail.com", "last_updated" = "2022-03-01", "is_primary" = false }
       ]
       "phone" = [
-        {"value" = "555-555-5678", "last_updated" = "2022-02-01", "is_primary" = true},
-        {"value" = "555-555-4321", "last_updated" = "2022-03-01", "is_primary" = false}
+        { "value" = "555-555-5678", "last_updated" = "2022-02-01", "is_primary" = true },
+        { "value" = "555-555-4321", "last_updated" = "2022-03-01", "is_primary" = false }
       ]
     }
   }

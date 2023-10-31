@@ -35,7 +35,7 @@ variable "vpc_name" {
 variable "admin" {
   description = "VMs admin"
   type        = string
-  default     = "nedorezov"
+  default     = "ubuntu"
 }
 
 variable "web_vm" {

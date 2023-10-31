@@ -143,7 +143,7 @@ variable "storage_vm" {
     image_id    = "ubuntu-2004-lts"
     platform_id = "standard-v1"
     preemptible = false
-    nat         = true
+    nat         = false
     resources = {
       cores         = 2
       memory        = 2

@@ -64,7 +64,7 @@ variable "web_vm" {
       core_fraction = 5
       disk          = 10
     }
-    metadata = {serial-port-enable = "1"}
+    metadata = { serial-port-enable = "1" }
   }
 }
 
@@ -101,7 +101,7 @@ variable "backend_vm" {
         core_fraction = 20
         disk          = 10
       }
-      metadata = {serial-port-enable = "1"}
+      metadata = { serial-port-enable = "1" }
     },
     {
       name        = "replica"
@@ -114,7 +114,48 @@ variable "backend_vm" {
         core_fraction = 5
         disk          = 10
       }
-      metadata = {serial-port-enable = "1"}
+      metadata = { serial-port-enable = "1" }
     }
   ]
+}
+
+### storage VM params
+variable "storage_vm" {
+  description = "VM params for 'storage' (single)"
+  type = object({
+    name        = string
+    image_id    = string
+    platform_id = string
+    preemptible = bool
+    nat         = bool
+    resources   = map(number)
+    disks = object({
+      count  = number
+      type   = string
+      size   = number
+      prefix = string
+    })
+    metadata = map(string)
+  })
+
+  default = {
+    name        = "storage"
+    image_id    = "ubuntu-2004-lts"
+    platform_id = "standard-v1"
+    preemptible = false
+    nat         = true
+    resources = {
+      cores         = 2
+      memory        = 2
+      core_fraction = 5
+      disk          = 10
+    }
+    disks = {
+      count  = 3
+      size   = 1
+      type   = "network-hdd"
+      prefix = "disk"
+    }
+    metadata = { serial-port-enable = "1" }
+  }
 }

@@ -12,7 +12,33 @@
 
 
 > ### Ответ:
-
+> В [variables.tf](src/variables.tf) объявил переменные `username`, `ssh_public_key` и список пакетов для установки `web_packages` (куда и добавил nginx).
+> 
+> Для cloudinit в `template_file` добавил vars:
+> ```terraform
+> data "template_file" "web_cloudinit" {
+>   template = file("./cloud-init.yml")
+>   vars = {
+>     username       = var.username
+>     ssh_public_key = file(var.ssh_public_key)
+>     packages       = jsonencode(var.web_packages)
+>   }
+> }
+> ```
+> 
+> В [outputs.tf](src/outputs.tf) добавил вывод информации из outputs модуля:
+> ```terraform
+> output "vm_info" {
+>   value = flatten([
+>     for i, v in module.web-vm.external_ip_address : {
+>       module.web-vm.fqdn[i] = v
+>     }
+>   ])
+> }
+> ```
+> 
+> Подключился к ВМ, выполнил тест конфигурации:
+> ![nginx -t](img/01.png)
 
 ------
 

@@ -228,7 +228,206 @@ module "vpc_dev" {
 
 
 > ### Ответ:
-
+> Обновил `vpc` модуль:
+> - [vpc/variables.tf](src/vpc/variables.tf) - вместо переменных `zone` и `cidr` добавил составную `subnets`
+> - [vpc/main.tf](src/vpc/main.tf) - добавил `for_each` в yandex_vpc_subnet
+> 
+> В основном файле [main.tf](src/main.tf) заменил вызов модуля на `vpc_dev` и `vpc_prod` с разными параметрами, также ВМ добавил в новую сеть dev-окружения.
+>
+> 
+> Обновил документацию: [vpc/README-4task.md](src/vpc/README-4task.md)
+> 
+> Результат `terraform apply`:
+> ![](img/10.png)
+> 
+> В консоли YC:
+> ![](img/08.png)
+> ![](img/09.png)
+> 
+> 
+> <details>
+>   <summary>План выполнения:</summary>
+> 
+> ```shell
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform plan
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 3s [id=fd8pf6624ff60n2pa1qk]
+> 
+> Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+>   + create
+> 
+> Terraform will perform the following actions:
+> 
+>   # module.vpc_dev.yandex_vpc_network.vpc will be created
+>   + resource "yandex_vpc_network" "vpc" {
+>       + created_at                = (known after apply)
+>       + default_security_group_id = (known after apply)
+>       + folder_id                 = (known after apply)
+>       + id                        = (known after apply)
+>       + labels                    = (known after apply)
+>       + name                      = "develop"
+>       + subnet_ids                = (known after apply)
+>     }
+> 
+>   # module.vpc_dev.yandex_vpc_subnet.subnet["ru-central1-a"] will be created
+>   + resource "yandex_vpc_subnet" "subnet" {
+>       + created_at     = (known after apply)
+>       + folder_id      = (known after apply)
+>       + id             = (known after apply)
+>       + labels         = (known after apply)
+>       + name           = "develop-ru-central1-a"
+>       + network_id     = (known after apply)
+>       + v4_cidr_blocks = [
+>           + "10.0.10.0/24",
+>         ]
+>       + v6_cidr_blocks = (known after apply)
+>       + zone           = "ru-central1-a"
+>     }
+> 
+>   # module.vpc_prod.yandex_vpc_network.vpc will be created
+>   + resource "yandex_vpc_network" "vpc" {
+>       + created_at                = (known after apply)
+>       + default_security_group_id = (known after apply)
+>       + folder_id                 = (known after apply)
+>       + id                        = (known after apply)
+>       + labels                    = (known after apply)
+>       + name                      = "production"
+>       + subnet_ids                = (known after apply)
+>     }
+> 
+>   # module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-a"] will be created
+>   + resource "yandex_vpc_subnet" "subnet" {
+>       + created_at     = (known after apply)
+>       + folder_id      = (known after apply)
+>       + id             = (known after apply)
+>       + labels         = (known after apply)
+>       + name           = "production-ru-central1-a"
+>       + network_id     = (known after apply)
+>       + v4_cidr_blocks = [
+>           + "10.0.1.0/24",
+>         ]
+>       + v6_cidr_blocks = (known after apply)
+>       + zone           = "ru-central1-a"
+>     }
+> 
+>   # module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-b"] will be created
+>   + resource "yandex_vpc_subnet" "subnet" {
+>       + created_at     = (known after apply)
+>       + folder_id      = (known after apply)
+>       + id             = (known after apply)
+>       + labels         = (known after apply)
+>       + name           = "production-ru-central1-b"
+>       + network_id     = (known after apply)
+>       + v4_cidr_blocks = [
+>           + "10.0.2.0/24",
+>         ]
+>       + v6_cidr_blocks = (known after apply)
+>       + zone           = "ru-central1-b"
+>     }
+> 
+>   # module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-c"] will be created
+>   + resource "yandex_vpc_subnet" "subnet" {
+>       + created_at     = (known after apply)
+>       + folder_id      = (known after apply)
+>       + id             = (known after apply)
+>       + labels         = (known after apply)
+>       + name           = "production-ru-central1-c"
+>       + network_id     = (known after apply)
+>       + v4_cidr_blocks = [
+>           + "10.0.3.0/24",
+>         ]
+>       + v6_cidr_blocks = (known after apply)
+>       + zone           = "ru-central1-c"
+>     }
+> 
+>   # module.web-vm.yandex_compute_instance.vm[0] will be created
+>   + resource "yandex_compute_instance" "vm" {
+>       + allow_stopping_for_update = true
+>       + created_at                = (known after apply)
+>       + description               = "TODO: description; {{terraform managed}}"
+>       + folder_id                 = (known after apply)
+>       + fqdn                      = (known after apply)
+>       + gpu_cluster_id            = (known after apply)
+>       + hostname                  = "develop-web-0"
+>       + id                        = (known after apply)
+>       + labels                    = {
+>           + "env"     = "develop"
+>           + "project" = "undefined"
+>         }
+>       + metadata                  = {
+>           + "serial-port-enable" = "1"
+>           + "user-data"          = <<-EOT
+>                 #cloud-config
+>                 users:
+>                   - name: nedorezov
+>                     groups: sudo
+>                     shell: /bin/bash
+>                     sudo: ['ALL=(ALL) NOPASSWD:ALL']
+>                     ssh_authorized_keys:
+>                       - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKWdwZ3ITR9ceNI5R/BcOHUf9H3G/i/u2MkOGk945cUI nedorezov@GARRO
+> 
+>                 package_update: true
+>                 package_upgrade: false
+>                 packages: ["vim","nginx"]
+>             EOT
+>         }
+>       + name                      = "develop-web-0"
+>       + network_acceleration_type = "standard"
+>       + platform_id               = "standard-v1"
+>       + service_account_id        = (known after apply)
+>       + status                    = (known after apply)
+>       + zone                      = "ru-central1-a"
+> 
+>       + boot_disk {
+>           + auto_delete = true
+>           + device_name = (known after apply)
+>           + disk_id     = (known after apply)
+>           + mode        = (known after apply)
+> 
+>           + initialize_params {
+>               + block_size  = (known after apply)
+>               + description = (known after apply)
+>               + image_id    = "fd8pf6624ff60n2pa1qk"
+>               + name        = (known after apply)
+>               + size        = 10
+>               + snapshot_id = (known after apply)
+>               + type        = "network-hdd"
+>             }
+>         }
+> 
+>       + network_interface {
+>           + index              = (known after apply)
+>           + ip_address         = (known after apply)
+>           + ipv4               = true
+>           + ipv6               = (known after apply)
+>           + ipv6_address       = (known after apply)
+>           + mac_address        = (known after apply)
+>           + nat                = true
+>           + nat_ip_address     = (known after apply)
+>           + nat_ip_version     = (known after apply)
+>           + security_group_ids = (known after apply)
+>           + subnet_id          = (known after apply)
+>         }
+> 
+>       + resources {
+>           + core_fraction = 5
+>           + cores         = 2
+>           + memory        = 1
+>         }
+> 
+>       + scheduling_policy {
+>           + preemptible = true
+>         }
+>     }
+> 
+> Plan: 7 to add, 0 to change, 0 to destroy.
+> 
+> Changes to Outputs:
+>   + vm_info = (known after apply)
+> ```
+> </details>
 
 ------
 

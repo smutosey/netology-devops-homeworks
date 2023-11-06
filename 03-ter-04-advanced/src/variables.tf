@@ -114,7 +114,7 @@ variable "mysql_env" {
   description = "MySQL cluster and database params"
   default = {
     cluster_name = "mysql_cluster"
-    high_availability = false
+    high_availability = true
     assign_public_ip = false
     database = {
       name = "test"

@@ -437,10 +437,156 @@ module "vpc_dev" {
 3. Используя оба модуля, создайте кластер example из одного хоста, а затем добавьте в него БД test и пользователя app. Затем измените переменную и превратите сингл хост в кластер из 2-х серверов.
 4. Предоставьте план выполнения и по возможности результат. Сразу же удаляйте созданные ресурсы, так как кластер может стоить очень дорого. Используйте минимальную конфигурацию.
 
-
-
 > ### Ответ:
-
+> Создал модуль [src/mysql](src/mysql) для создания кластера, документация: [README.md](src/mysql/README.md)
+> 
+> Создал модуль [src/database](src/database) для создания БД и пользователя, документация: [README.md](src/database/README.md)
+> 
+> Сначала создадим кластер с `HA = false`: 
+> 
+> <details>
+>   <summary>План выполнения:</summary>
+> 
+> ```shell
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform plan
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.vpc_dev.yandex_vpc_network.vpc: Refreshing state... [id=enp9101u6ihqk1s6u77c]
+> module.vpc_prod.yandex_vpc_network.vpc: Refreshing state... [id=enp0uboqekbphkjg3vnh]
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 2s [id=fd8pf6624ff60n2pa1qk]
+> module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-b"]: Refreshing state... [id=e2lh4n2397g3qkj3q13l]
+> module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-a"]: Refreshing state... [id=e9bvv0mr8lq4c2pl3012]
+> module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-c"]: Refreshing state... [id=b0cb0acllvrrmn1ec1q9]
+> module.vpc_dev.yandex_vpc_subnet.subnet["ru-central1-a"]: Refreshing state... [id=e9bte8n8mkoa5slbktfr]
+> module.web-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmu53ccrhmape4hh8bk]
+> 
+> Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+>   + create
+> 
+> Terraform will perform the following actions:
+> 
+>   # module.mysql_cluster.yandex_mdb_mysql_cluster.mysql will be created
+>   + resource "yandex_mdb_mysql_cluster" "mysql" {
+>       + allow_regeneration_host   = false
+>       + backup_retain_period_days = (known after apply)
+>       + created_at                = (known after apply)
+>       + deletion_protection       = (known after apply)
+>       + environment               = "PRESTABLE"
+>       + folder_id                 = (known after apply)
+>       + health                    = (known after apply)
+>       + host_group_ids            = (known after apply)
+>       + id                        = (known after apply)
+>       + mysql_config              = (known after apply)
+>       + name                      = "mysql_cluster"
+>       + network_id                = "enp0uboqekbphkjg3vnh"
+>       + status                    = (known after apply)
+>       + version                   = "8.0"
+> 
+>       + host {
+>           + assign_public_ip   = false
+>           + fqdn               = (known after apply)
+>           + replication_source = (known after apply)
+>           + subnet_id          = "e9bvv0mr8lq4c2pl3012"
+>           + zone               = "ru-central1-a"
+>         }
+> 
+>       + maintenance_window {
+>           + day  = "SAT"
+>           + hour = 12
+>           + type = "WEEKLY"
+>         }
+> 
+>       + resources {
+>           + disk_size          = 10
+>           + disk_type_id       = "network-hdd"
+>           + resource_preset_id = "b1.medium"
+>         }
+>     }
+> 
+>   # module.mysql_database.yandex_mdb_mysql_database.db will be created
+>   + resource "yandex_mdb_mysql_database" "db" {
+>       + cluster_id = (known after apply)
+>       + id         = (known after apply)
+>       + name       = "test"
+>     }
+> 
+>   # module.mysql_database.yandex_mdb_mysql_user.db_user will be created
+>   + resource "yandex_mdb_mysql_user" "db_user" {
+>       + authentication_plugin = (known after apply)
+>       + cluster_id            = (known after apply)
+>       + global_permissions    = (known after apply)
+>       + id                    = (known after apply)
+>       + name                  = "app"
+>       + password              = (sensitive value)
+> 
+>       + permission {
+>           + database_name = "test"
+>           + roles         = [
+>               + "ALL",
+>             ]
+>         }
+>     }
+> 
+> Plan: 3 to add, 0 to change, 0 to destroy.
+> 
+> ```
+> </details>
+> 
+> ![](img/11.png)
+> ![](img/12.png)
+> ![](img/13.png)
+> ![](img/14.png)
+> 
+> Переключил на `HA = true`.
+> 
+> <details>
+>   <summary>План выполнения:</summary>
+> 
+> ```shell
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform apply
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.vpc_prod.yandex_vpc_network.vpc: Refreshing state... [id=enp0uboqekbphkjg3vnh]
+> module.vpc_dev.yandex_vpc_network.vpc: Refreshing state... [id=enp9101u6ihqk1s6u77c]
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 3s [id=fd8pf6624ff60n2pa1qk]
+> module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-b"]: Refreshing state... [id=e2lh4n2397g3qkj3q13l]
+> module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-c"]: Refreshing state... [id=b0cb0acllvrrmn1ec1q9]
+> module.vpc_prod.yandex_vpc_subnet.subnet["ru-central1-a"]: Refreshing state... [id=e9bvv0mr8lq4c2pl3012]
+> module.vpc_dev.yandex_vpc_subnet.subnet["ru-central1-a"]: Refreshing state... [id=e9bte8n8mkoa5slbktfr]
+> module.mysql_cluster.yandex_mdb_mysql_cluster.mysql: Refreshing state... [id=c9qud61efiqo3sc6emn9]
+> module.web-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmu53ccrhmape4hh8bk]
+> module.mysql_database.yandex_mdb_mysql_database.db: Refreshing state... [id=c9qud61efiqo3sc6emn9:test]
+> module.mysql_database.yandex_mdb_mysql_user.db_user: Refreshing state... [id=c9qud61efiqo3sc6emn9:app]
+> 
+> Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+>   ~ update in-place
+> 
+> Terraform will perform the following actions:
+> 
+>   # module.mysql_cluster.yandex_mdb_mysql_cluster.mysql will be updated in-place
+>   ~ resource "yandex_mdb_mysql_cluster" "mysql" {
+>         id                        = "c9qud61efiqo3sc6emn9"
+>         name                      = "mysql_cluster"
+>         # (14 unchanged attributes hidden)
+> 
+>       + host {
+>           + assign_public_ip = false
+>           + subnet_id        = "e2lh4n2397g3qkj3q13l"
+>           + zone             = "ru-central1-b"
+>         }
+> 
+>         # (6 unchanged blocks hidden)
+>     }
+> 
+> Plan: 0 to add, 1 to change, 0 to destroy.
+> ```
+> </details>
+> 
+> В консоли YC видно второй хост-реплику в кластере:
+> 
+> ![](img/15.png)
 
 ------
 

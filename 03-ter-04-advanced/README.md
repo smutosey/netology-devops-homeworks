@@ -76,9 +76,126 @@
 4. Импортируйте всё обратно. Проверьте terraform plan. Изменений быть не должно.
 Приложите список выполненных команд и скриншоты процессы.
 
-
-
 > ### Ответ:
+> Список ресурсов в стейте: ``` terraform state list ```
+> 
+> ![state list](img/05.png)
+> 
+> Удалил из стейта модуль vpc: ``` terraform state rm module.vpc ```
+> 
+> Удалил из стейта модуль vm: ``` terraform state rm module.web-vm ```
+> 
+> ![state list](img/06.png)
+> 
+> Выполнил импорт обратно: 
+> ```shell
+> terraform import module.vpc.yandex_vpc_network.vpc enpiledd5clgigjdkvbu
+> terraform import module.vpc.yandex_vpc_subnet.subnet e9bp1t2m32jkr7ef3j7c
+> terraform import module.web-vm.yandex_compute_instance.vm[0] fhmn812ie1mt6a97u9qd
+> ```
+> Скриншот импорта на примере ВМ:
+> ![import](img/07.png)
+> 
+> В результате при выполнении `terraform plan` почему-то все равно есть изменение, в ВМ добавляется `+ allow_stopping_for_update = true`. 
+> 
+> Т.е. при импорте в файле `terraform.tfstate` у инстанса указан `"allow_stopping_for_update": null,`. Вероятно, наткнулся на баг (или фичу?) версии Terraform или провайдера.
+> Для подтверждения приложил полный лог консоли:
+> 
+> <details>
+>   <summary>Console log</summary>
+>
+> ```shell
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform state rm module.vpc
+> Removed module.vpc.yandex_vpc_network.vpc
+> Removed module.vpc.yandex_vpc_subnet.subnet
+> Successfully removed 2 resource instance(s).
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform state rm module.web-vm
+> Removed module.web-vm.data.yandex_compute_image.my_image
+> Removed module.web-vm.yandex_compute_instance.vm[0]
+> Successfully removed 2 resource instance(s).
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform state list
+> data.template_file.web_cloudinit
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform import module.vpc.yandex_vpc_network.vpc enpiledd5clgigjdkvbu
+> module.vpc.yandex_vpc_network.vpc: Importing from ID "enpiledd5clgigjdkvbu"...
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.vpc.yandex_vpc_network.vpc: Import prepared!
+>   Prepared yandex_vpc_network for import
+> module.vpc.yandex_vpc_network.vpc: Refreshing state... [id=enpiledd5clgigjdkvbu]
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 3s [id=fd8pf6624ff60n2pa1qk]
+> 
+> Import successful!
+> 
+> The resources that were imported are shown above. These resources are now in
+> your Terraform state and will henceforth be managed by Terraform.
+> 
+> 
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform import module.vpc.yandex_vpc_subnet.subnet e9bp1t2m32jkr7ef3j7c
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.vpc.yandex_vpc_subnet.subnet: Importing from ID "e9bp1t2m32jkr7ef3j7c"...
+> module.vpc.yandex_vpc_subnet.subnet: Import prepared!
+>   Prepared yandex_vpc_subnet for import
+> module.vpc.yandex_vpc_subnet.subnet: Refreshing state... [id=e9bp1t2m32jkr7ef3j7c]
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 3s [id=fd8pf6624ff60n2pa1qk]
+> 
+> Import successful!
+> 
+> The resources that were imported are shown above. These resources are now in
+> your Terraform state and will henceforth be managed by Terraform.
+> 
+> 
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform import module.web-vm.yandex_compute_instance.vm[0] fhmn812ie1mt6a97u9qd
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 3s [id=fd8pf6624ff60n2pa1qk]
+> module.web-vm.yandex_compute_instance.vm[0]: Importing from ID "fhmn812ie1mt6a97u9qd"...
+> module.web-vm.yandex_compute_instance.vm[0]: Import prepared!
+>   Prepared yandex_compute_instance for import
+> module.web-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmn812ie1mt6a97u9qd]
+> 
+> Import successful!
+> 
+> The resources that were imported are shown above. These resources are now in
+> your Terraform state and will henceforth be managed by Terraform.
+> 
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$ terraform plan
+> module.web-vm.data.yandex_compute_image.my_image: Reading...
+> module.vpc.yandex_vpc_network.vpc: Refreshing state... [id=enpiledd5clgigjdkvbu]
+> data.template_file.web_cloudinit: Reading...
+> data.template_file.web_cloudinit: Read complete after 0s [id=2c384563b1230d3a4ea15c35848a87a0cd061a07a53e3434513636ff896da271]
+> module.web-vm.data.yandex_compute_image.my_image: Read complete after 3s [id=fd8pf6624ff60n2pa1qk]
+> module.vpc.yandex_vpc_subnet.subnet: Refreshing state... [id=e9bp1t2m32jkr7ef3j7c]
+> module.web-vm.yandex_compute_instance.vm[0]: Refreshing state... [id=fhmn812ie1mt6a97u9qd]
+> 
+> Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following symbols:
+>   ~ update in-place
+> 
+> Terraform will perform the following actions:
+> 
+>   # module.web-vm.yandex_compute_instance.vm[0] will be updated in-place
+>   ~ resource "yandex_compute_instance" "vm" {
+>       + allow_stopping_for_update = true
+>         id                        = "fhmn812ie1mt6a97u9qd"
+>         name                      = "develop-web-0"
+>         # (11 unchanged attributes hidden)
+> 
+>         # (6 unchanged blocks hidden)
+>     }
+> 
+> Plan: 0 to add, 1 to change, 0 to destroy.
+> 
+> ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── 
+> 
+> Note: You didn't use the -out option to save this plan, so Terraform can't guarantee to take exactly these actions if you run "terraform apply" now.
+> nedorezov@GARRO:/mnt/e/netology-devops-homeworks/03-ter-04-advanced/src$
+> 
+> ```
+>
+> </details>
 
 
 ------

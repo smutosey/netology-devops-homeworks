@@ -6,32 +6,46 @@
 #}
 
 module "vpc_dev" {
-  source = "./vpc"
-  name   = "develop"
-  subnets = [
-    { zone = "ru-central1-a", cidr = "10.0.10.0/24" }
-  ]
+  source  = "./vpc"
+  name    = var.dev_env.vpc_name
+  subnets = var.dev_env.subnets
 }
 module "vpc_prod" {
-  source = "./vpc"
-  name   = "production"
-  subnets = [
-    { zone = "ru-central1-a", cidr = "10.0.1.0/24" },
-    { zone = "ru-central1-b", cidr = "10.0.2.0/24" },
-    { zone = "ru-central1-c", cidr = "10.0.3.0/24" },
-  ]
+  source  = "./vpc"
+  name    = var.prod_env.vpc_name
+  subnets = var.prod_env.subnets
 }
+
+module "mysql_cluster" {
+  source     = "./mysql"
+  name       = var.mysql_env.cluster_name
+  network_id = module.vpc_prod.network.id
+  HA         = var.mysql_env.high_availability
+  hosts = {
+    assign_public_ip = var.mysql_env.assign_public_ip
+    subnets          = module.vpc_prod.subnets
+  }
+}
+
+module "mysql_database" {
+  source       = "./database"
+  cluster_id   = module.mysql_cluster.cluster_id
+  db_name      = var.mysql_env.database.name
+  username     = var.mysql_env.database.username
+  password     = var.mysql_password
+}
+
 
 module "web-vm" {
   source         = "git::https://github.com/udjin10/yandex_compute_instance.git?ref=main"
-  env_name       = "develop"
+  env_name       = var.vm_params.env_name
   network_id     = module.vpc_dev.network.id
-  subnet_zones   = ["ru-central1-a"]
-  subnet_ids     = [module.vpc_dev.subnet["ru-central1-a"].id]
-  instance_name  = "web"
-  instance_count = 1
-  image_family   = "ubuntu-2004-lts"
-  public_ip      = true
+  subnet_zones   = [var.vm_params.zone]
+  subnet_ids     = [module.vpc_dev.subnet[var.vm_params.zone].id]
+  instance_name  = var.vm_params.instance_name
+  instance_count = var.vm_params.count
+  image_family   = var.vm_params.image_family
+  public_ip      = var.vm_params.public_ip
 
   metadata = {
     user-data          = data.template_file.web_cloudinit.rendered

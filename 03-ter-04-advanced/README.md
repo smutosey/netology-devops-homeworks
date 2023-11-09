@@ -598,27 +598,21 @@ Path: example
 secret data key: test 
 secret data value: congrats!  
 4. Считайте этот секрет с помощью terraform и выведите его в output по примеру:
-```
-provider "vault" {
- address = "http://<IP_ADDRESS>:<PORT_NUMBER>"
- skip_tls_verify = true
- token = "education"
-}
-data "vault_generic_secret" "vault_example"{
- path = "secret/example"
-}
-
-output "vault_example" {
- value = "${nonsensitive(data.vault_generic_secret.vault_example.data)}"
-} 
-
-Можно обратиться не к словарю, а конкретному ключу:
-terraform console: >nonsensitive(data.vault_generic_secret.vault_example.data.<имя ключа в секрете>)
-```
 5. Попробуйте самостоятельно разобраться в документации и записать новый секрет в vault с помощью terraform. 
 
 
 > ### Ответ:
+> Развернул Vault через [docker-compose.yml](vault/docker-compose.yml). (обновил путь к image в DockerHub, т.к. vault переехал в hashicorp/vault)
+> 
+> Подключение к Vault, считывание и запись секретов описаны в [vault/main.tf](vault/main.tf). Для теста записываю секреты в path `secret/student`.
+> 
+> Секреты (в т.ч. токен) переданы через `personal.auto.tfvars`, описаны в [variables.tf](vault/variables.tf).
+> 
+> В результате `terraform plan` + `terraform apply`: 
+> ![](img/17.png)
+> Созданный секрет в UI Vault:
+> ![](img/16.png)
+> 
 
 
 ------

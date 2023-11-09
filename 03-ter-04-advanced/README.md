@@ -594,9 +594,9 @@ module "vpc_dev" {
 1. Разверните у себя локально vault, используя docker-compose.yml в проекте.
 2. Для входа в web-интерфейс и авторизации terraform в vault используйте токен "education".
 3. Создайте новый секрет по пути http://127.0.0.1:8200/ui/vault/secrets/secret/create
-Path: example  
-secret data key: test 
-secret data value: congrats!  
+   - Path: example  
+   - secret data key: test  
+   - secret data value: congrats!  
 4. Считайте этот секрет с помощью terraform и выведите его в output по примеру:
 5. Попробуйте самостоятельно разобраться в документации и записать новый секрет в vault с помощью terraform. 
 

@@ -29,5 +29,15 @@
 03.01. [Введение в Terraform](03-ter-01-intro)  
 03.02. [Основы Terraform. Yandex Cloud](03-ter-02-basics)  
 03.03. [Управляющие конструкции в коде Terraform](03-ter-03-structures)  
-03.04. [(to-do) Продвинутые методы работы с Terraform](03-ter-04-extended)  
+03.04. [Продвинутые методы работы с Terraform](03-ter-04-advanced)  
 03.05. [(to-do) Использование Terraform в команде](03-ter-05-teamwork)
+
+## Модуль "Система управления конфигурациями"
+Задания - [тут](https://github.com/netology-code/mnt-homeworks/tree/MNT-video) 
+
+04.01. [Введение в Ansible](04-cms-01-ansible)  
+04.02. [(to-do) Работа с Playbook](04-cms-02-playbook)  
+04.03. [(to-do) Использование Ansible](04-cms-03-work)  
+04.04. [(to-do) Работа с roles](04-cms-04-roles)  
+04.05. [(to-do) Тестирование roles](04-cms-05-tests)
+04.06. [(to-do) Создание собственных модулей](04-cms-06-modules)

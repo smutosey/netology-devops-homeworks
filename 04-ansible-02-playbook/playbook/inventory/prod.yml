@@ -1,0 +1,5 @@
+---
+clickhouse:
+  hosts:
+    clickhouse-0.ru-central1.internal:
+      ansible_host: 84.201.134.78

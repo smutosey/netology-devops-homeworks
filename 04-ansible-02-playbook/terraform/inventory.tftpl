@@ -1,0 +1,7 @@
+---
+clickhouse:
+  hosts:
+%{ for i, v in instances ~}
+    ${i}:
+      ansible_host: ${v}
+%{ endfor ~}

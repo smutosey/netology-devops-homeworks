@@ -35,9 +35,9 @@
 ## Модуль "Система управления конфигурациями"
 Задания - [тут](https://github.com/netology-code/mnt-homeworks/tree/MNT-video) 
 
-04.01. [Введение в Ansible](04-cms-01-ansible)  
-04.02. [(to-do) Работа с Playbook](04-cms-02-playbook)  
-04.03. [(to-do) Использование Ansible](04-cms-03-work)  
-04.04. [(to-do) Работа с roles](04-cms-04-roles)  
-04.05. [(to-do) Тестирование roles](04-cms-05-tests)
-04.06. [(to-do) Создание собственных модулей](04-cms-06-modules)
+04.01. [Введение в Ansible](04-ansible-01-base)  
+04.02. [Работа с Playbook](04-ansible-02-playbook)  
+04.03. [(to-do) Использование Ansible](04-ansible-03-yandex)  
+04.04. [(to-do) Работа с roles](04-ansible-04-role)  
+04.05. [(to-do) Тестирование roles](04-ansible-05-testing)  
+04.06. [(to-do) Создание собственных модулей](04-ansible-06-module)

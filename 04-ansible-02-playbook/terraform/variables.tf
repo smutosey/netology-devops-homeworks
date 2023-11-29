@@ -37,27 +37,51 @@ variable "web_packages" {
   default = ["vim"]
 }
 
-variable "vm_params" {
+variable "clickhouse_params" {
   type = object({
-    count = number
-    instance_name = string
-    zone = string
-    image_family = string
-    public_ip = bool
-    instance_cores = number
+    count           = number
+    instance_name   = string
+    zone            = string
+    image_family    = string
+    public_ip       = bool
+    instance_cores  = number
     instance_memory = number
-    boot_disk_size = number
+    boot_disk_size  = number
   })
-  description = "params for Web VMs"
+  description = "params for Clickhouse VM"
   default = {
-    count = 1
-    instance_name = "clickhouse"
-    zone = "ru-central1-a"
-    image_family = "ubuntu-2004-lts"
-    public_ip = true
-    instance_cores = 2
+    count           = 1
+    instance_name   = "clickhouse"
+    zone            = "ru-central1-a"
+    image_family    = "centos-7"
+    public_ip       = true
+    instance_cores  = 2
     instance_memory = 4
-    boot_disk_size = 30
+    boot_disk_size  = 30
+  }
+}
+
+variable "vector_params" {
+  type = object({
+    count           = number
+    instance_name   = string
+    zone            = string
+    image_family    = string
+    public_ip       = bool
+    instance_cores  = number
+    instance_memory = number
+    boot_disk_size  = number
+  })
+  description = "params for VMs with Vector"
+  default = {
+    count           = 2
+    instance_name   = "vector"
+    zone            = "ru-central1-a"
+    image_family    = "ubuntu-2004-lts"
+    public_ip       = true
+    instance_cores  = 2
+    instance_memory = 2
+    boot_disk_size  = 20
   }
 }
 

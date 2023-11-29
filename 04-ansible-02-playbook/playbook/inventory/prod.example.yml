@@ -4,11 +4,11 @@ all:
     clickhouse:
       hosts:
         clickhouse-0.ru-central1.internal:
-          ansible_host: 158.160.62.141
+          ansible_host: 51.250.73.57
 
     vector:
       hosts:
         vector-0.ru-central1.internal:
-          ansible_host: 158.160.38.134
+          ansible_host: 51.250.72.107
         vector-1.ru-central1.internal:
-          ansible_host: 84.252.130.222
+          ansible_host: 51.250.95.155

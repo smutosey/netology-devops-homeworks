@@ -1,15 +1,8 @@
-output "vm_info" {
-  value = flatten([
-    for i, v in module.web-vm.external_ip_address : {
-      module.web-vm.fqdn[i] = v
-    }
-  ])
-}
-
 resource "local_file" "inventory" {
   content = templatefile(
     "${path.module}/inventory.tftpl", {
-      instances = {for i, v in module.web-vm.external_ip_address : module.web-vm.fqdn[i] => v}
+      clickhouse = { for i, v in module.clickhouse-vm.external_ip_address : module.clickhouse-vm.fqdn[i] => v }
+      vectors    = { for i, v in module.vector-vms.external_ip_address : module.vector-vms.fqdn[i] => v }
     }
   )
   filename = "../playbook/inventory/prod.yml"

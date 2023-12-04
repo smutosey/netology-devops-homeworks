@@ -1,0 +1,21 @@
+---
+all:
+  children:
+    clickhouse:
+      hosts:
+        clickhouse-0.ru-central1.internal:
+          ansible_host: 158.160.57.246
+
+    vector:
+      hosts:
+        vector-0.ru-central1.internal:
+          ansible_host: 158.160.38.2
+        vector-1.ru-central1.internal:
+          ansible_host: 158.160.44.117
+
+    lighthouse:
+      hosts:
+        lighthouse-0.ru-central1.internal:
+          ansible_host: 62.84.125.108
+        lighthouse-1.ru-central1.internal:
+          ansible_host: 130.193.50.23

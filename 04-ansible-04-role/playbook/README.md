@@ -12,7 +12,7 @@
 
 ## Конфигурация
 
-Список хостов (inventory) должен включать группы `clickhouse` и `veсtor`. Пример: [prod.example.yml](inventory/prod.example.yml)
+Список хостов (inventory) должен включать группы `lighthouse`, `clickhouse` и `veсtor`. Пример: [prod.example.yml](inventory/prod.example.yml)
 
 Для изменения параметров Clickhouse можно переопределить дефолтные переменные роли `ansible-clickhouse`. Полный список переменных доступен в описании ролей. Базовая конфигурация определена в файле [clickhouse vars.yml](group_vars/clickhouse/vars.yml):
 

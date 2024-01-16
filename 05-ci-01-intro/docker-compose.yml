@@ -1,0 +1,17 @@
+version: '3'
+services:
+  jira:
+    hostname: jira
+    container_name: jira-software
+    image: atlassian/jira-software:9.12.2
+    environment:
+      JVM_MINIMUM_MEMORY: 1024m
+      JVM_MAXIMUM_MEMORY: 7168m
+    ports:
+      - "8080:8080"
+    volumes:
+      - jira-volume:/var/atlassian/application-data/jira
+
+volumes:
+  jira-volume:
+    name: jira-volume

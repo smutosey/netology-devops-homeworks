@@ -32,13 +32,17 @@
 ### Ответ:
 С помощью [terraform](./terraform) поднял необходимые ВМ:
 ![](img/01.png)
+
 [playbook](./src/infrastructure/site.yml) отработал успешно:
 ![](img/02.png)
+
 В SonarQube создал проект и установил sonar-scanner:
 ![](img/03.png)
 ![](img/04.png)
+
 Анализатор показал следующие warnings:
 ![](img/06.png)
+
 Исправил ошибки в коде, итоговый: [fail.py](./src/example/fail.py). Повторный отчет анализатора без ошибок:
 ![](img/07.png)
 ![](img/08.png)
@@ -88,9 +92,8 @@
 
 ### Ответ:
 Установил Maven, проверил доступность.
+
 Изменил [pom.xml](src/mvn/pom.xml), запустил `mvn package`, сборка прошла успешно:
 ![](img/11.png)
-
-
 
 ---

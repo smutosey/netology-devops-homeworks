@@ -1,0 +1,24 @@
+---
+stages:
+  - build
+  - delivery
+
+variables:
+  IMAGE_BUILD: $YC_REGISTRY/$CI_PROJECT_NAME/hello:gitlab-$CI_COMMIT_SHORT_SHA
+  IMAGE_LATEST: $YC_REGISTRY/$CI_PROJECT_NAME/hello:latest
+
+build:
+  stage: build
+  script:
+    - cat $YC_KEY | docker login --username json_key --password-stdin cr.yandex
+    - docker build -t $IMAGE_BUILD .
+    - docker push $IMAGE_BUILD
+
+latest:
+  stage: delivery
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  script:
+    - cat $YC_KEY | docker login --username json_key --password-stdin cr.yandex
+    - docker build -t $IMAGE_LATEST .
+    - docker push $IMAGE_LATEST

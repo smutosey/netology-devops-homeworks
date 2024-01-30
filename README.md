@@ -44,3 +44,13 @@
 04.04. [Работа с roles](04-ansible-04-role)  
 04.05. [(to-do) Тестирование roles](04-ansible-05-testing)  
 04.06. [(to-do) Создание собственных модулей](04-ansible-06-module)
+
+## Модуль "Непрерывная разработка и интеграция"
+
+Задания - [тут](https://github.com/netology-code/mnt-homeworks/tree/MNT-video)
+
+05.01. [Жизненный цикл ПО](05-ci-01-intro)
+05.03. [Процессы CI/CD](05-ci-03-cicd)  
+05.04. [(to-do) Jenkins](05-ci-04-jenkins)  
+05.05. [(to-do) Teamcity](05-ci-05-teamcity)  
+05.06. [GitLab](05-ci-06-gitlab)  

@@ -134,8 +134,7 @@ curl -X GET http://localhost/images/4e6df220-295e-4231-82bc-45e4b1484430.jpg
 
 <details>
     <summary>Запуск `docker compose`</summary>
-    
-    ```bash
+
     nedorezov@GARRO:/mnt/e/netology-devops-homeworks/11-microservices-02-principles/src$ docker compose up --build
     [+] Building 2.6s (22/22) FINISHED                                                                                                                                                                                                                                                                                                                                   docker:default
      => [uploader internal] load build definition from Dockerfile                                                                                                                                                                                                                                                                                                                  0.0s
@@ -222,7 +221,6 @@ curl -X GET http://localhost/images/4e6df220-295e-4231-82bc-45e4b1484430.jpg
     src-gateway-1        | {"time_local":"08/Mar/2024:13:00:38 +0000","remote_addr":"172.22.0.1","remote_user":"","request":"POST /v1/upload HTTP/1.1","status": "200","body_bytes_sent":"55","request_time":"0.044","http_referrer":"","http_user_agent":"curl/8.4.0","http_x_forwarded_for":"","upstream_connect_time":"0.001","upstream_header_time":"0.042","upstream_response_time":"0.042"}
     src-security-1       | 172.22.0.6 - - [08/Mar/2024 13:01:00] "GET /v1/token/validation HTTP/1.0" 200 -
     src-gateway-1        | {"time_local":"08/Mar/2024:13:01:00 +0000","remote_addr":"172.22.0.1","remote_user":"","request":"GET /v1/user/572738df-2cad-487c-a38e-6823d59e46cd.jpg HTTP/1.1","status": "200","body_bytes_sent":"146496","request_time":"0.004","http_referrer":"","http_user_agent":"curl/8.4.0","http_x_forwarded_for":"","upstream_connect_time":"0.000","upstream_header_time":"0.001","upstream_response_time":"0.002"}
-    ```
 </details>
 
 Проверил работу загрузки и выгрузки файла с аутентификацией:

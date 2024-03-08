@@ -134,6 +134,7 @@ curl -X GET http://localhost/images/4e6df220-295e-4231-82bc-45e4b1484430.jpg
 
 <details>
     <summary>Запуск `docker compose`</summary>
+    
     ```bash
     nedorezov@GARRO:/mnt/e/netology-devops-homeworks/11-microservices-02-principles/src$ docker compose up --build
     [+] Building 2.6s (22/22) FINISHED                                                                                                                                                                                                                                                                                                                                   docker:default

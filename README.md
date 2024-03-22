@@ -59,7 +59,7 @@
 
 Задания - [тут](https://github.com/netology-code/mnt-homeworks/tree/MNT-video)
 
-05.01. [Жизненный цикл ПО](05-ci-01-intro)
+05.01. [Жизненный цикл ПО](05-ci-01-intro)  
 05.03. [Процессы CI/CD](05-ci-03-cicd)  
 05.04. [(to-do) Jenkins](05-ci-04-jenkins)  
 05.05. [(to-do) Teamcity](05-ci-05-teamcity)  
@@ -71,10 +71,10 @@
 
 Задания - [тут](https://github.com/netology-code/mnt-homeworks/tree/MNT-video)
 
-06.01. [Системы мониторинга](06-monitoring-01-systems)
+06.01. [Системы мониторинга](06-monitoring-01-systems)  
 06.02. [Средство визуализации Grafana](06-monitoring-02-grafana)  
 06.04. [(to-do) Система сбора логов Elastic Stack](06-monitoring-03-elk)  
-06.05. [Платформа мониторинга Sentry](06-monitoring-04-sentry)
+06.05. [Платформа мониторинга Sentry](06-monitoring-04-sentry)  
 
 ------
 
@@ -82,9 +82,9 @@
 
 Задания - [тут](https://github.com/netology-code/micros-homeworks/tree/main)
 
-11.02. [Микросервисы: принципы](11-microservices-02-principles)
-11.03. [Микросервисы: подходы](11-microservices-03-approaches)
-11.04. [(to-do) Микросервисы: масштабирование](11-microservices-04)
+11.02. [Микросервисы: принципы](11-microservices-02-principles)  
+11.03. [Микросервисы: подходы](11-microservices-03-approaches)  
+11.04. [(to-do) Микросервисы: масштабирование](11-microservices-04)  
 
 ------
 

@@ -21,8 +21,6 @@
 <details>
 <summary>Инструменты и дополнительные материалы, которые пригодятся для выполнения задания</summary>
 
-### Инструменты и дополнительные материалы, которые пригодятся для выполнения задания
-
 1. [Описание](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) Deployment и примеры манифестов.
 2. [Описание](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) Init-контейнеров.
 3. [Описание](https://github.com/wbitt/Network-MultiTool) Multitool.
